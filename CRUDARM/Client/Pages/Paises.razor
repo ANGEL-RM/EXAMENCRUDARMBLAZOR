@@ -1,0 +1,153 @@
+﻿@page "/Paises"
+@inject NavigationManager navmanager
+@inject IJSRuntime js
+@inject IManager manager
+<button type="button" class="btn btn-outline-info" @onclick="(() => OpenDialog(EnTipoEvento.Alta, EnTipoObjeto.Pais, null))">Agregar País</button>
+@if (ListaPaises.Count != 0)
+{
+    <table class="table table-active table-responsive" width="100%">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pais in ListaPaises)
+            {
+                <tr>
+                    <td>
+                        <div @onclick="@(() => navmanager.NavigateTo($"/Estados/{pais.PaisId}"))">
+                            @pais.Nombre
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<MatDialog @bind-IsOpen="@dialogProcesoPais">
+    <EditForm Model="Pais" OnValidSubmit="CrearActualizarPais">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <div class="col">
+                <div class="input-container">
+                    <input type="text" @bind-value="@Pais.Nombre" />
+                    <label>País</label>
+                </div>
+                <ValidationMessage For="@(() => Pais.Nombre)" />
+            </div>
+        </div>
+        @if (flagProcesoPais)
+        {
+            <div style="display: flex; justify-content: center;">
+                <div>
+                    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Small" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="float-right">
+                <MatButton Type="submit" Disabled="flagProcesoPais" Raised="true">Registrar</MatButton>
+            </div>
+        }
+    </EditForm>
+</MatDialog>
+@code {
+    protected Tbl_Pais Pais { get; set; } = new Tbl_Pais();
+    protected List<Tbl_Pais> ListaPaises { get; set; } = new List<Tbl_Pais>();
+
+    protected bool flagProcesoPais { get; set; }
+    protected string mensajeError { get; set; }
+    protected bool dialogProcesoPais { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerPaises();
+    }
+
+    #region Obtener
+    private async Task ObtenerPaises()
+    {
+        try
+        {
+            var respuesta = await manager.Get<List<Tbl_Pais>>($"api/Externos/ObtenerPaises");
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaPaises = respuesta.Datos;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    #region MetodosCrear
+    private async Task CrearActualizarPais()
+    {
+        try
+        {
+            var respuesta = await manager.Post<Tbl_Pais, Tbl_Pais>($"api/Externos/CrearActualizarPais", Pais);
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaPaises.Add(respuesta.Datos);
+                dialogProcesoPais = false;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    #region componentes
+    public enum EnTipoEvento
+    {
+        Alta = 1,
+        Actualizar = 2,
+        Eliminar = 3
+    }
+
+    public enum EnTipoObjeto
+    {
+        Pais = 1
+    }
+
+    public EnTipoEvento _Evento { get; set; }
+    public EnTipoObjeto _Objeto { get; set; }
+    #endregion
+
+    #region void
+    protected void OpenDialog(EnTipoEvento Evento, EnTipoObjeto Objeto, Object DTO)
+    {
+        _Evento = Evento;
+        _Objeto = Objeto;
+
+        switch (Evento)
+        {
+            case EnTipoEvento.Alta:
+                if (Objeto == EnTipoObjeto.Pais)
+                {
+                    Pais = new Tbl_Pais();
+                    dialogProcesoPais = true;
+                }
+                break;
+            case EnTipoEvento.Actualizar:
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion
+}

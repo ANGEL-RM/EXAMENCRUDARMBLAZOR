@@ -1,0 +1,64 @@
+﻿@page "/RegistrosPersona"
+@inject NavigationManager navmanager
+@inject IManager manager
+<div class="div-table-resposive">
+    <table class="tbl-table">
+        <thead>
+            <tr class="tbl_table_tr">
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var persona in ListaPersonas)
+            {
+                <tr class="tbl_table_tr">
+                    <td class="tbl_table_td">
+                        @persona.PersonaId
+                    </td>
+                    <td class="tbl_table_td">
+                        <div @onclick="@(() => navmanager.NavigateTo($"/InformacionPersonal/{persona.PersonaId}"))">
+                            @persona.nombre @persona.apellidoP @persona.apellidoM
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@code{
+    #region Class
+    protected List<PersonaDTO> ListaPersonas { get; set; } = new List<PersonaDTO>();
+    #endregion
+
+    #region Variable
+    protected string mensajeError { get; set; }
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerTotalPersonas();
+    }
+
+    #region MetodosObtener
+    private async Task ObtenerTotalPersonas()
+    {
+        try
+        {
+            var respuesta = await manager.Get<List<PersonaDTO>>($"api/Persona/ObtenerTotalPersonas");
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaPersonas = respuesta.Datos;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+}

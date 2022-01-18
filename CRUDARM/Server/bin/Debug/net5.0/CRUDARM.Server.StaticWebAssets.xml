@@ -1,0 +1,6 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="/" Path="Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\wwwroot\" />
+  <ContentRoot BasePath="_content/MatBlazor" Path="C:\Users\SLAYER\.nuget\packages\matblazor\2.9.0-develop-042\build\..\staticwebassets\" />
+</StaticWebAssets>

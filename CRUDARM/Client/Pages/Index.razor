@@ -1,0 +1,37 @@
+﻿@page "/"
+@inject NavigationManager navmanager
+    <header>
+        <div id="logo">
+            <img src="/img/WEBARM.jpg" width="300" height="150">
+            <h1>Angel RM</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a @onclick="@(()=>navegarpagina(1))">Personas</a></li>
+                <li><a @onclick="@(()=>navegarpagina(2))">Ingreso de personal</a></li>
+                <li><a @onclick="@(()=>navegarpagina(3))">Agregar Pais</a></li>
+            </ul>
+        </nav>
+    </header>
+        @code{
+            #region void
+            private void navegarpagina(int opc)
+            {
+                if (opc.Equals(1))
+                {
+                    navmanager.NavigateTo("/RegistrosPersona");
+                }
+                else if (opc.Equals(2))
+                {
+                    navmanager.NavigateTo("/CrearPersona");
+                }else if (opc.Equals(3))
+                {
+                    navmanager.NavigateTo("/Paises");
+            }
+                else
+                {
+                    navmanager.NavigateTo("/");
+                }
+            }
+            #endregion
+        }

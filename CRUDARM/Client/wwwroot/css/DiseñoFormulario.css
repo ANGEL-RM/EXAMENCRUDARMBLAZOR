@@ -1,0 +1,36 @@
+﻿.formcontenedor {
+    width: 80%;
+    padding: 16px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: #ccc;
+}
+.formcontenedor label {
+        white-space: nowrap;
+        /*overflow: hidden;
+        text-overflow: ellipsis;*/
+        /*width: 72px;*/
+        font-weight: bold;
+        /*display: inline-block;*/
+    }
+.formcontenedor input[type="submit"] {
+    width: 100%;
+    padding: 8px 16px;
+    margin-top: 32px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: block;
+    color: #fff;
+    background-color: #000;
+}
+.formcontenedor input[type="submit"]:hover {
+        cursor: pointer;
+    }
+.contenedor {
+    padding: 0;
+}
+.contenedor .A, .contenedor .B { /*hijos*/
+        position: absolute;
+        left: 200px;
+        top: 0;
+    }

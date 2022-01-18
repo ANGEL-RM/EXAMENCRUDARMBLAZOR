@@ -1,0 +1,11 @@
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\bin\Debug\net5.0\CRUDARM.Shared.deps.json
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\bin\Debug\net5.0\CRUDARM.Shared.dll
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\bin\Debug\net5.0\ref\CRUDARM.Shared.dll
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\bin\Debug\net5.0\CRUDARM.Shared.pdb
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.GeneratedMSBuildEditorConfig.editorconfig
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.AssemblyInfoInputs.cache
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.AssemblyInfo.cs
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.csproj.CoreCompileInputs.cache
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.dll
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\ref\CRUDARM.Shared.dll
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.pdb

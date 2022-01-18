@@ -1,0 +1,71 @@
+﻿@page "/InformacionPersonal/{TempPersonalId:long}"
+@inject IManager manager
+<div class="formcontenedor">
+    <div class="row">
+        <div class="col">
+            <label>Nombre:</label>
+            <span>@PersonaDTO.nombre</span>
+        </div>
+        <div class="col">
+                <label>Apellido Paterno:</label>
+                <span>@PersonaDTO.apellidoP</span>
+        </div>
+        <div class="col">
+            <label>Apellido Materno:</label>
+            <span>@PersonaDTO.apellidoM</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Sexo:</label>
+            <span>@PersonaDTO.sexo</span>
+        </div>
+        <div class="col">
+            <label>Fecha de Nacimiento:</label>
+            <span>@PersonaDTO.fechanacimiento</span>
+        </div>
+        <div class="col">
+            <label>Curp:</label>
+            <span>@PersonaDTO.curp</span>
+        </div>
+    </div>
+    <input type="submit" name="enviar" value="enviar datos" />
+</div>
+@code {
+    [Parameter] public long TempPersonalId { get; set; }
+
+    #region Class
+    protected PersonaDTO PersonaDTO { get; set; } = new PersonaDTO();
+    #endregion
+
+    #region variables
+    private string MensajeError { get; set; }
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerInformacionPersonalPorId();
+    }
+
+    #region MetodosObtener
+    private async Task ObtenerInformacionPersonalPorId()
+    {
+        try
+        {
+            var respuesta = await manager.Get<PersonaDTO>($"api/Persona/ObtenerInformacionPersonalPorId/{TempPersonalId}");
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                PersonaDTO = respuesta.Datos;
+            }
+            else
+            {
+                MensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            MensajeError = ex.ToString();
+        }
+    }
+    #endregion
+}

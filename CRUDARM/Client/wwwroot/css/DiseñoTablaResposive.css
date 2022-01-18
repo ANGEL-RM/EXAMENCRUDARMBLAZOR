@@ -1,0 +1,84 @@
+﻿.tbl-thead {
+    font-weight: normal !important;
+    font-size: 0.8rem;
+}
+.tbl-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border: #e6ecef 1px solid;
+}
+.tbl-table thead .tbl_table_tr {
+        height: 40px;
+        background-color: #e6ecef;
+        color: #000000;
+        font-weight: normal;
+        font-size: 15px;
+        text-align: center;
+        border: #e6ecef 1px solid;
+    }
+.tbl-table .tbl_table_td {
+        border: #e6ecef 1px solid;
+        text-align: center;
+    }
+.tbl-table tbody .tbl_table_tr {
+        height: 40px;
+        border-bottom: 1px solid #f7f9fa;
+    }
+.tbl-table tbody tr:nth-of-type(even) {
+            background-color: #f7f9fa;
+        }
+.div-table-resposive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+@media screen and (max-width: 767px) {
+    .div-table-resposive {
+        width: 100%;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+        .div-table-resposive > .table {
+            margin-bottom: 0;
+        }
+    .table-responsive > .table > thead > tr > th,
+    .table-responsive > .table > tbody > tr > th,
+    .table-responsive > .table > tfoot > tr > th,
+    .table-responsive > .table > thead > tr > td,
+    .table-responsive > .table > tbody > tr > td,
+    .table-responsive > .table > tfoot > tr > td {
+        white-space: nowrap;
+    }
+}
+.tbl-table .tbl_table_tdorden {
+    padding: 0px 0px 0px 30px;
+    border: #e6ecef 1px solid;
+}
+.tbl-table .tbl_table_tdorden .tbl-table2 {
+        width: 100% !important;
+        border-collapse: collapse;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        border: #e6ecef 1px solid;
+    }
+.tbl-table .tbl_table_tdorden .tbl-table2 thead .tbl_table_tr {
+            height: 40px;
+            background-color: #e6ecef;
+            color: #000000;
+            font-weight: normal;
+            font-size: 15px;
+            text-align: center;
+            border: #e6ecef 1px solid;
+        }
+.tbl-table .tbl_table_tdorden .tbl-table2 .tbl_table_td {
+            border: #e6ecef 1px solid;
+            text-align: left;
+        }
+.tbl-table .tbl_table_tdorden .tbl-table2 tbody .tbl_table_tr {
+            height: 40px;
+            border-bottom: 1px solid #f7f9fa;
+        }
+.tbl-table .tbl_table_tdorden .tbl-table2 tbody tr:nth-of-type(even) {
+            background-color: #f7f9fa;
+        }

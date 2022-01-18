@@ -1,0 +1,153 @@
+﻿@page "/Estados/{TempPaisId:long}"
+@inject NavigationManager navmanager
+@inject IJSRuntime js
+@inject IManager manager
+<button type="button" class="btn btn-outline-info" @onclick="(() => OpenDialog(EnTipoEvento.Alta, EnTipoObjeto.Estado, null))">Agregar Estado</button>
+@if (ListaEstados.Count != 0)
+{
+    <table class="table table-active table-responsive" width="100%">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estado in ListaEstados)
+            {
+                <tr>
+                    <td>
+                        @estado.Nombre
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<MatDialog @bind-IsOpen="@dialogProcesoEstado">
+    <EditForm Model="Estado" OnValidSubmit="CrearActualizarEstado">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <div class="col">
+                <div class="input-container">
+                    <input type="text" @bind-value="@Estado.Nombre" />
+                    <label>Estado</label>
+                </div>
+                <ValidationMessage For="@(() => Estado.Nombre)" />
+            </div>
+        </div>
+        @if (flagProcesoPais)
+        {
+            <div style="display: flex; justify-content: center;">
+                <div>
+                    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Small" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="float-right">
+                <MatButton Type="submit" Disabled="flagProcesoPais" Raised="true">Registrar</MatButton>
+            </div>
+        }
+    </EditForm>
+</MatDialog>
+@code {
+    [Parameter] public long TempPaisId { get; set; }
+
+    protected Tbl_Estados Estado { get; set; } = new Tbl_Estados();
+    protected List<Tbl_Estados> ListaEstados { get; set; } = new List<Tbl_Estados>();
+
+    protected bool flagProcesoPais { get; set; }
+    protected string mensajeError { get; set; }
+    protected bool dialogProcesoEstado { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerEstados();
+    }
+
+    #region Obtener
+    private async Task ObtenerEstados()
+    {
+        try
+        {
+            var respuesta = await manager.Get<List<Tbl_Estados>>($"api/Externos/ObtenerEstados");
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaEstados = respuesta.Datos;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    #region MetodosCrear
+    private async Task CrearActualizarEstado()
+    {
+        try
+        {
+            var respuesta = await manager.Post<Tbl_Estados, Tbl_Estados>($"api/Externos/CrearActualizarEstado", Estado);
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaEstados.Add(respuesta.Datos);
+                dialogProcesoEstado = false;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    #region componentes
+    public enum EnTipoEvento
+    {
+        Alta = 1,
+        Actualizar = 2,
+        Eliminar = 3
+    }
+
+    public enum EnTipoObjeto
+    {
+        Estado = 1
+    }
+
+    public EnTipoEvento _Evento { get; set; }
+    public EnTipoObjeto _Objeto { get; set; }
+    #endregion
+
+    #region void
+    protected void OpenDialog(EnTipoEvento Evento, EnTipoObjeto Objeto, Object DTO)
+    {
+        _Evento = Evento;
+        _Objeto = Objeto;
+
+        switch (Evento)
+        {
+            case EnTipoEvento.Alta:
+                if (Objeto == EnTipoObjeto.Estado)
+                {
+                    Estado = new Tbl_Estados();
+                    dialogProcesoEstado = true;
+                }
+                break;
+            case EnTipoEvento.Actualizar:
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion
+}

@@ -1,0 +1,129 @@
+﻿@*@page "/Personas"
+@inject IManager manager
+<button type="button" class="btn btn-outline-info" @onclick="(() => OpenDialog(EnTipoEvento.Alta, EnTipoObjeto.Persona, null))">Agregar Persona</button>
+@if (ListaPersonas.Count != 0)
+{
+    <table class="table table-active table-responsive" width="100%">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido Paterno</td>
+                <td>Apellido Materno</td>
+                <td>Sexo</td>
+                <td>Fecha de Nacimiento</td>
+                <td>Curp</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var persona in ListaPersonas)
+            {
+                <tr>
+                    <td>
+                        @persona.nombre
+                    </td>
+                    <td>
+                        @persona.apellidoP
+                    </td>
+                    <td>
+                        @persona.apellidoM
+                    </td>
+                    <td>
+                        @persona.sexo
+                    </td>
+                    <td>
+                        @persona.fechanacimiento
+                    </td>
+                    <td>
+                        @persona.curp
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<MatDialog @bind-IsOpen="@dialogProcesoPersona">
+    
+</MatDialog>
+@code{
+    #region Class
+    protected List<PersonaDTO> ListaPersonas { get; set; } = new List<PersonaDTO>();
+    
+    #endregion
+
+    #region Variables
+    protected bool dialogProcesoPersona { get; set; }
+    
+    
+    #endregion
+
+    #region componentes
+    public enum EnTipoEvento
+    {
+        Alta = 1,
+        Actualizar = 2,
+        Eliminar = 3
+    }
+
+    public enum EnTipoObjeto
+    {
+        Persona = 1
+    }
+
+    public EnTipoEvento _Evento { get; set; }
+    public EnTipoObjeto _Objeto { get; set; }
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerTotalPersonas();
+    }
+
+    #region MetodosObtener
+    private async Task ObtenerTotalPersonas()
+    {
+        try
+        {
+            var respuesta = await manager.Get<List<PersonaDTO>>($"api/Persona/ObtenerTotalPersonas");
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaPersonas = respuesta.Datos;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    
+
+    #region void
+    protected void OpenDialog(EnTipoEvento Evento, EnTipoObjeto Objeto, Object DTO)
+    {
+        _Evento = Evento;
+        _Objeto = Objeto;
+
+        switch (Evento)
+        {
+            case EnTipoEvento.Alta:
+                if (Objeto == EnTipoObjeto.Persona)
+                {
+                    ProcesoPersona = new PersonaDTO();
+                    ProcesoPersona.fechanacimiento = DateTime.Now;
+                    fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
+                    dialogProcesoPersona = true;
+                }
+                break;
+            case EnTipoEvento.Actualizar:
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion
+}*@

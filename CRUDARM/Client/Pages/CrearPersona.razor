@@ -1,0 +1,247 @@
+﻿@page "/CrearPersona"
+@inject NavigationManager navmanager
+@inject IJSRuntime js
+@inject IManager manager
+<EditForm Model="ProcesoPersona" OnValidSubmit="CrearActualizarPersona">
+    <DataAnnotationsValidator />
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.nombre" />
+                <label>Nombre</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.nombre)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.apellidoP" />
+                <label>Apellido Paterno</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.apellidoP)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.apellidoM" />
+                <label>Apellido Materno</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.apellidoM)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Sexo</label>
+            <select class="custom-select" @bind="@ProcesoPersona.sexo" style="width:100%">
+                <option disabled selected value="">Selecciona Sexo</option>
+                <option value="Masulino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+            <ValidationMessage For="@(() => ProcesoPersona.sexo)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="date" min="@fechamindate" max="@fechamaxdate" @bind-value="@ProcesoPersona.fechanacimiento" />
+                <label>Fecha de Nacimiento</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.fechanacimiento)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" maxlength="18" @bind-value="@ProcesoPersona.curp" />
+                <label>Curp</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.curp)" />
+        </div>
+    </div>
+    <br />
+    <h1>Ubicación</h1>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.direccion" />
+                <label>Dirección</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.direccion)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.ninterno" />
+                <label>Numero Interior</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.ninterno)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.nexterno" />
+                <label>Numero Exterior</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.nexterno)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.colonia" />
+                <label>Colonia</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.colonia)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @if (ListaPaises.Count != 0)
+            {
+                        @foreach (var pais in ListaPaises)
+                        {
+                                    <div @onclick="@(() => navmanager.NavigateTo($"/Estados/{pais.PaisId}"))">
+                                        @pais.Nombre
+                                 </div>
+                        }
+            }
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.pais" />
+                <label>País</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.pais)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.estado" />
+                <label>Estado</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.estado)" />
+        </div>
+    </div>
+    <br />
+    <h1>Historial Laboral</h1>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="text" @bind-value="@ProcesoPersona.dTrabajo" />
+                <label>Donde Trabajo</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.dTrabajo)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="date" min="1800-01-01" max="@fechaActual" @bind-value="@ProcesoPersona.fechaInicio" />
+                <label>Fecha de Inicio</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.fechaInicio)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-container">
+                <input type="date" min="1800-01-01" max="@fechaActual" @bind-value="@ProcesoPersona.fechaFinal" />
+                <label>Fecha de Finalización</label>
+            </div>
+            <ValidationMessage For="@(() => ProcesoPersona.fechaFinal)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Descripción de Actividades</label>
+            <textarea class="estilotextarea2" cols="60" rows="8" @bind="@ProcesoPersona.descAct" />
+            <ValidationMessage For="@(() => ProcesoPersona.descAct)" />
+        </div>
+    </div>
+    <br />
+    <h1>Contacto</h1>
+    @if (flagProcesoPersona)
+    {
+        <div style="display: flex; justify-content: center;">
+            <div>
+                <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Small" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="float-right">
+            <MatButton Type="submit" Disabled="flagProcesoPersona" Raised="true">Registrar</MatButton>
+        </div>
+    }
+</EditForm>
+@code{
+    protected PersonaDTO ProcesoPersona { get; set; } = new PersonaDTO();
+    protected ContactoDTO contactoDTO { get; set; } = new ContactoDTO();
+    protected List<Tbl_Pais> ListaPaises { get; set; } = new List<Tbl_Pais>();
+    #region variable
+    protected string fechaActual { get; set; }
+    protected bool flagProcesoPersona { get; set; }
+    protected string mensajeError { get; set; }
+    protected string fechamaxdate { get; set; }
+    protected string fechamindate { get; set; }
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1);
+        fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
+        fechamaxdate = (DateTime.Now.AddYears(-1)).ToString("yyyy-MM-dd");
+        fechamindate = (DateTime.Now.AddYears(-100)).ToString("yyyy-MM-dd");
+        ProcesoPersona.fechanacimiento = DateTime.Now.AddYears(-1);
+        await ObtenerPaises();
+    }
+
+    #region Obtener
+    private async Task ObtenerPaises()
+    {
+        try
+        {
+            var respuesta = await manager.Get<List<Tbl_Pais>>($"api/Externos/ObtenerPaises");
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                ListaPaises = respuesta.Datos;
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    #region MetodosCrear
+    private async Task CrearActualizarPersona()
+    {
+        try
+        {
+            var respuesta = await manager.Post<PersonaDTO, PersonaDTO>($"api/Persona/CrearActualizarPersona", ProcesoPersona);
+            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+            {
+                await js.InvokeVoidAsync("Swal.fire", "success", respuesta.Estatus.Mensaje, "Exitoso");
+                navmanager.NavigateTo("/");
+            }
+            else
+            {
+                mensajeError = respuesta.Estatus.Mensaje;
+            }
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+}
