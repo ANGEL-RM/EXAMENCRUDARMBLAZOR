@@ -12,5 +12,6 @@ namespace CRUDARM.Shared.Externos
         [Key]
         public long EstadoId { get; set; }
         public string Nombre { get; set; }
+        public long PaisId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page "/RegistrosPersona"
 @inject NavigationManager navmanager
 @inject IManager manager
+<button type="button" class="btn btn-outline-dark" @onclick="@(() => navmanager.NavigateTo("/"))">Regresar</button>
 <div class="div-table-resposive">
     <table class="tbl-table">
         <thead>
@@ -16,7 +17,7 @@
                     <td class="tbl_table_td">
                         @persona.PersonaId
                     </td>
-                    <td class="tbl_table_td">
+                    <td class="tbl_table_td" style="cursor:pointer">
                         <div @onclick="@(() => navmanager.NavigateTo($"/InformacionPersonal/{persona.PersonaId}"))">
                             @persona.nombre @persona.apellidoP @persona.apellidoM
                         </div>

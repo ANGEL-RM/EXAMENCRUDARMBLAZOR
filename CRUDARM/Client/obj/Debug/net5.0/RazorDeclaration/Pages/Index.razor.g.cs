@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,7 +133,7 @@ using CRUDARM.Shared.Externos;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\Index.razor"
+#line 12 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\Index.razor"
               
             #region void
             private void navegarpagina(int opc)

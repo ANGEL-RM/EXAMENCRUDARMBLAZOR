@@ -2,6 +2,7 @@
 @inject NavigationManager navmanager
 @inject IJSRuntime js
 @inject IManager manager
+<button type="button" class="btn btn-outline-dark" @onclick="@(() => navmanager.NavigateTo("/"))">Regresar</button>
 <button type="button" class="btn btn-outline-info" @onclick="(() => OpenDialog(EnTipoEvento.Alta, EnTipoObjeto.Pais, null))">Agregar País</button>
 @if (ListaPaises.Count != 0)
 {
@@ -9,6 +10,7 @@
         <thead>
             <tr>
                 <td>Nombre</td>
+                <td style="width:100px"></td>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +21,9 @@
                         <div @onclick="@(() => navmanager.NavigateTo($"/Estados/{pais.PaisId}"))">
                             @pais.Nombre
                         </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info" @onclick="@(() => navmanager.NavigateTo($"/Estados/{pais.PaisId}"))">Ver Estados</button>
                     </td>
                 </tr>
             }

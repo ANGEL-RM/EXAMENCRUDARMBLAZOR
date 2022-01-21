@@ -1,5 +1,7 @@
 ﻿@page "/InformacionPersonal/{TempPersonalId:long}"
+@inject NavigationManager navmanager
 @inject IManager manager
+<button type="button" class="btn btn-outline-dark" @onclick="@(() => navmanager.NavigateTo("/RegistrosPersona"))">Regresar</button>
 <div class="formcontenedor">
     <div class="row">
         <div class="col">
@@ -7,29 +9,113 @@
             <span>@PersonaDTO.nombre</span>
         </div>
         <div class="col">
-                <label>Apellido Paterno:</label>
-                <span>@PersonaDTO.apellidoP</span>
-        </div>
-        <div class="col">
-            <label>Apellido Materno:</label>
-            <span>@PersonaDTO.apellidoM</span>
+            <label>Apellido Paterno:</label>
+            <span>@PersonaDTO.apellidoP</span>
         </div>
     </div>
     <div class="row">
         <div class="col">
+            <label>Apellido Materno:</label>
+            <span>@PersonaDTO.apellidoM</span>
+        </div>
+        <div class="col">
             <label>Sexo:</label>
             <span>@PersonaDTO.sexo</span>
         </div>
+    </div>
+    <div class="row">
         <div class="col">
             <label>Fecha de Nacimiento:</label>
-            <span>@PersonaDTO.fechanacimiento</span>
+            <span>@(PersonaDTO.fechanacimiento.HasValue ? PersonaDTO.fechanacimiento.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : null)</span>
         </div>
         <div class="col">
             <label>Curp:</label>
             <span>@PersonaDTO.curp</span>
         </div>
     </div>
-    <input type="submit" name="enviar" value="enviar datos" />
+    <hr />
+    <h1>Ubicación</h1>
+    <div>
+        <div class="col">
+            <label>Domicilio:</label>
+            <span>@PersonaDTO.direccion</span>
+        </div>
+        <div class="col">
+            <label>Numero Interior:</label>
+            <span>@PersonaDTO.ninterno</span>
+        </div>
+    </div>
+    <div>
+        <div class="col">
+            <label>Numero Exterior:</label>
+            <span>@PersonaDTO.nexterno</span>
+        </div>
+        <div class="col">
+            <label>Colonia:</label>
+            <span>@PersonaDTO.colonia</span>
+        </div>
+    </div>
+    <div>
+        <div class="col">
+            <label>País:</label>
+            <span>@PersonaDTO.Nombrepais</span>
+        </div>
+        <div class="col">
+            <label>Estado:</label>
+            <span>@PersonaDTO.Nombreestado</span>
+        </div>
+    </div>
+    @if (PersonaDTO.ListaContactos.Count != 0)
+    {
+        <hr />
+        <h1>Contacto</h1>
+        @foreach (var contacto in PersonaDTO.ListaContactos)
+        {
+            <div class="row">
+                <div class="col">
+                    <label>Telefono:</label>
+                    <span>@contacto.Telefono</span>
+                </div>
+                <div class="col">
+                    <label>Tipo:</label>
+                    <span>@contacto.Tipo</span>
+                </div>
+            </div>
+            <br />
+        }
+    }
+    @if (PersonaDTO.ListHistoriaLab.Count != 0)
+    {
+        <h1>Historial Laboral</h1>
+        @foreach (var historia in PersonaDTO.ListHistoriaLab)
+        {
+            <div class="row">
+                <div class="col">
+                    <label>Donde Trabajó:</label>
+                    <span>@historia.DTrabajo</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Fecha Inicio:</label>
+                    <span>@(historia.FechaInicio.HasValue ? historia.FechaInicio.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : null)</span>
+                </div>
+            </div>
+            <div>
+                <div class="col">
+                    <label>Fecha Finalización:</label>
+                    <span>@(historia.FechaFinal.HasValue ? historia.FechaFinal.Value.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture) : null)</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Descripción de Actividades:</label>
+                    <span>@historia.DescAct</span>
+                </div>
+            </div>
+            <br />
+        }
+    }
 </div>
 @code {
     [Parameter] public long TempPersonalId { get; set; }

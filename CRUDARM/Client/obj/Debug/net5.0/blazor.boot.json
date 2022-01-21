@@ -226,13 +226,13 @@
       "mscorlib.dll": "sha256-+dB3Q0YubUPF1oZDMVZn6ZCiRkzRomtLoq51T5FocJk=",
       "netstandard.dll": "sha256-dOHF0zANIyA4WS496iWrAkTuEFWSWrXJjZj2pQQHrMA=",
       "System.Private.CoreLib.dll": "sha256-C96+zv+mWW0XzMG520oRgAG1lHVY8xzWGc6oc6rFjws=",
-      "CRUDARM.Shared.dll": "sha256-TbX4P3u3CDhh52jc2Ilx6BhE+y8u\/ovpSt\/f0fQqPYA=",
-      "CRUDARM.Client.dll": "sha256-up8v0Nx5V\/5U08b65ih1iNwGoMO+0igt\/PTyzPIN67Y="
+      "CRUDARM.Shared.dll": "sha256-HeGzXfPM6G+Kd2I6fQnX6EfhDTTswARgrb8gvaxh3do=",
+      "CRUDARM.Client.dll": "sha256-UMUHwofKZ4PYiYF5xQjteqk2w7hc\/S5xcFXIrLXTN0A="
     },
     "lazyAssembly": null,
     "pdb": {
-      "CRUDARM.Shared.pdb": "sha256-2qJy18kcXlvlizTdoD3f\/3f7r7s6PtHu3grNWNanAsI=",
-      "CRUDARM.Client.pdb": "sha256-y+hdRPHFsHsS\/8Y46wApqVklYs1p6YXBUs9Vd5fOEBI="
+      "CRUDARM.Shared.pdb": "sha256-7Y2wz5nfiXwYci3pjsQ1LLJtj8ii42IHeGEKRNe0sks=",
+      "CRUDARM.Client.pdb": "sha256-Bvf0rlMgOUNl8PPSIeslUGs38vuGBhQv\/mT\/kWuT2HE="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-ir9YCVnnk7popgsYUkvitfGA4WpkP1ydPh\/ENHnxGys=",

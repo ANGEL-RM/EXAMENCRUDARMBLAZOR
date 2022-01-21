@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Estados/{TempPaisId:long}")]
     public partial class Estados : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,7 +133,7 @@ using CRUDARM.Shared.Externos;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 54 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\Estados.razor"
+#line 55 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\Estados.razor"
        
     [Parameter] public long TempPaisId { get; set; }
 
@@ -216,6 +223,7 @@ using CRUDARM.Shared.Externos;
                 if (Objeto == EnTipoObjeto.Estado)
                 {
                     Estado = new Tbl_Estados();
+                    Estado.PaisId = TempPaisId;
                     dialogProcesoEstado = true;
                 }
                 break;

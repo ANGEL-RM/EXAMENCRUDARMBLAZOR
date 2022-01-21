@@ -13,5 +13,6 @@ namespace CRUDARM.Shared.Persona
         public long ContactoId { get; set; }
         public string Telefono { get; set; }
         public string Tipo { get; set; }
+        public long PersonaId { get; set; }
     }
 }

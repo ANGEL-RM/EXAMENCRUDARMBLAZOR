@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     public partial class MainLayout : LayoutComponentBase
     {
         #pragma warning disable 1998

@@ -1,18 +1,14 @@
 ﻿@page "/"
 @inject NavigationManager navmanager
-    <header>
-        <div id="logo">
-            <img src="/img/WEBARM.jpg" width="300" height="150">
-            <h1>Angel RM</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a @onclick="@(()=>navegarpagina(1))">Personas</a></li>
-                <li><a @onclick="@(()=>navegarpagina(2))">Ingreso de personal</a></li>
-                <li><a @onclick="@(()=>navegarpagina(3))">Agregar Pais</a></li>
-            </ul>
+    <div class="contenedormenu">
+        <nav class="menu">
+            <ol>
+                <li class="menu-item" style="cursor:pointer"><a @onclick="@(()=>navegarpagina(1))">Personas</a></li>
+                <li class="menu-item" style="cursor:pointer"><a @onclick="@(()=>navegarpagina(2))">Ingreso del personal</a></li>
+                <li class="menu-item" style="cursor:pointer"><a @onclick="@(()=>navegarpagina(3))">Agregar Pais</a></li>
+            </ol>
         </nav>
-    </header>
+    </div>
         @code{
             #region void
             private void navegarpagina(int opc)

@@ -47,7 +47,7 @@ namespace CRUDARM.Server.Controllers
             catch (Exception ex)
             {
                 respuesta.Estado = EstadosDeRespuesta.Error;
-                respuesta.Estatus.Mensaje = $"Ocurrio un error al renombrar la empresa: {ex.Message}";
+                respuesta.Estatus.Mensaje = $"Ocurrio un error en el proceso: {ex.Message}";
             }
             return respuesta;
         }
@@ -64,7 +64,26 @@ namespace CRUDARM.Server.Controllers
             catch (Exception ex)
             {
                 respuesta.Estado = EstadosDeRespuesta.Error;
-                respuesta.Estatus.Mensaje = $"ocurrio un error al obtener las Empresas: {ex.Message}";
+                respuesta.Estatus.Mensaje = $"ocurrio un error al obtener los Países: {ex.Message}";
+            }
+            return respuesta;
+        }
+
+        [HttpGet]
+        [Route("ObtenerEstadosporPais/{PaisId}")]
+        public async Task<Respuesta<Tbl_ConsultaDTO>> ObtenerEstadosporPais(long PaisId)
+        {
+            var respuesta = new Respuesta<Tbl_ConsultaDTO> { Estado = EstadosDeRespuesta.Correcto, Datos = new Tbl_ConsultaDTO() };
+            try
+            {
+                var pais = await datos.Tbl_Pais.FirstAsync(p => p.PaisId == PaisId).ConfigureAwait(false);
+                respuesta.Datos.NombrePais = pais.Nombre;
+                respuesta.Datos.estados = await datos.Tbl_Estados.AsNoTracking().Where(c => c.PaisId == PaisId).ToListAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                respuesta.Estado = EstadosDeRespuesta.Error;
+                respuesta.Estatus.Mensaje = $"ocurrio un error al obtener los Estados: {ex.Message}";
             }
             return respuesta;
         }
@@ -92,7 +111,7 @@ namespace CRUDARM.Server.Controllers
             catch (Exception ex)
             {
                 respuesta.Estado = EstadosDeRespuesta.Error;
-                respuesta.Estatus.Mensaje = $"Ocurrio un error al renombrar la empresa: {ex.Message}";
+                respuesta.Estatus.Mensaje = $"Ocurrio un error en el proceso: {ex.Message}";
             }
             return respuesta;
         }
@@ -109,7 +128,7 @@ namespace CRUDARM.Server.Controllers
             catch (Exception ex)
             {
                 respuesta.Estado = EstadosDeRespuesta.Error;
-                respuesta.Estatus.Mensaje = $"ocurrio un error al obtener las Empresas: {ex.Message}";
+                respuesta.Estatus.Mensaje = $"ocurrio un error al obtener los estados: {ex.Message}";
             }
             return respuesta;
         }

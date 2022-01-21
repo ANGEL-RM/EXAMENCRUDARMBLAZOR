@@ -2,6 +2,7 @@
 @inject NavigationManager navmanager
 @inject IJSRuntime js
 @inject IManager manager
+<button type="button" class="btn btn-outline-dark" @onclick="@(() => navmanager.NavigateTo("/Paises"))">Regresar</button>
 <button type="button" class="btn btn-outline-info" @onclick="(() => OpenDialog(EnTipoEvento.Alta, EnTipoObjeto.Estado, null))">Agregar Estado</button>
 @if (ListaEstados.Count != 0)
 {
@@ -140,6 +141,7 @@
                 if (Objeto == EnTipoObjeto.Estado)
                 {
                     Estado = new Tbl_Estados();
+                    Estado.PaisId = TempPaisId;
                     dialogProcesoEstado = true;
                 }
                 break;

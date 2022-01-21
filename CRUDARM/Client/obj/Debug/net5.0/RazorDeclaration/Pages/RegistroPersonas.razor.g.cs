@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/RegistrosPersona")]
     public partial class RegistroPersonas : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,7 +133,7 @@ using CRUDARM.Shared.Externos;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 29 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\RegistroPersonas.razor"
+#line 30 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\RegistroPersonas.razor"
       
     #region Class
     protected List<PersonaDTO> ListaPersonas { get; set; } = new List<PersonaDTO>();

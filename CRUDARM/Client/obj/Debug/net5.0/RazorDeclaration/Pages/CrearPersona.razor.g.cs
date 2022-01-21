@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/CrearPersona")]
     public partial class CrearPersona : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,27 +133,42 @@ using CRUDARM.Shared.Externos;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 181 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\CrearPersona.razor"
+#line 226 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\CrearPersona.razor"
       
     protected PersonaDTO ProcesoPersona { get; set; } = new PersonaDTO();
     protected ContactoDTO contactoDTO { get; set; } = new ContactoDTO();
     protected List<Tbl_Pais> ListaPaises { get; set; } = new List<Tbl_Pais>();
+
+    protected List<Tbl_Estados> ListaEstados { get; set; } = new List<Tbl_Estados>();
     #region variable
     protected string fechaActual { get; set; }
     protected bool flagProcesoPersona { get; set; }
+    protected bool invalidCurp { get; set; }
     protected string mensajeError { get; set; }
     protected string fechamaxdate { get; set; }
     protected string fechamindate { get; set; }
+    protected string fechaminfechainicio { get; set; }
     #endregion
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1);
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < 2)
+            {
+                ProcesoPersona.ListaContactos.Add(new ContactoDTO());
+            }
+            if (i < 3)
+            {
+                ProcesoPersona.ListHistoriaLab.Add(new Tbl_HistoriaLab_DTO());
+            }
+        }
         fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
         fechamaxdate = (DateTime.Now.AddYears(-1)).ToString("yyyy-MM-dd");
         fechamindate = (DateTime.Now.AddYears(-100)).ToString("yyyy-MM-dd");
-        ProcesoPersona.fechanacimiento = DateTime.Now.AddYears(-1);
+        ProcesoPersona.fechanacimiento = null;
         await ObtenerPaises();
+
     }
 
     #region Obtener
@@ -169,18 +191,16 @@ using CRUDARM.Shared.Externos;
             mensajeError = ex.ToString();
         }
     }
-    #endregion
 
-    #region MetodosCrear
-    private async Task CrearActualizarPersona()
+    private async Task ObtenerEstados(long PaisId)
     {
         try
         {
-            var respuesta = await manager.Post<PersonaDTO, PersonaDTO>($"api/Persona/CrearActualizarPersona", ProcesoPersona);
+            var respuesta = await manager.Get<Tbl_ConsultaDTO>($"api/Externos/ObtenerEstadosporPais/{PaisId}");
             if (respuesta.Estado == EstadosDeRespuesta.Correcto)
             {
-                await js.InvokeVoidAsync("Swal.fire", "success", respuesta.Estatus.Mensaje, "Exitoso");
-                navmanager.NavigateTo("/");
+                ListaEstados = respuesta.Datos.estados;
+                StateHasChanged();
             }
             else
             {
@@ -190,6 +210,95 @@ using CRUDARM.Shared.Externos;
         catch (Exception ex)
         {
             mensajeError = ex.ToString();
+        }
+    }
+    #endregion
+
+    #region void
+    private async void AsignarPais(ChangeEventArgs e)
+    {
+        long PaisId = Convert.ToInt64(e.Value.ToString());
+        ProcesoPersona.pais = PaisId;
+        await ObtenerEstados(PaisId);
+    }
+
+    private async void AsignarEstado(ChangeEventArgs e)
+    {
+        long EstadoId = Convert.ToInt64(e.Value.ToString());
+        ProcesoPersona.estado = EstadoId;
+    }
+
+    private void Formatearfechas(ChangeEventArgs args)
+    {
+        var value = args.Value.ToString();
+        DateTime tempday = value == string.Empty ? DateTime.Today : DateTime.Parse(value);
+        ProcesoPersona.fechanacimiento = tempday;
+        foreach (var historia in ProcesoPersona.ListHistoriaLab)
+        {
+            historia.FechaInicio = null;
+            historia.FechaFinal = null;
+        }
+        fechaminfechainicio = tempday.AddYears(14).ToString("yyyy-MM-dd");
+    }
+
+    private void Formatearfinalizacionfechas(ChangeEventArgs args, Tbl_HistoriaLab_DTO historial)
+    {
+        var value = args.Value.ToString();
+        historial.FechaInicio = value == string.Empty ? DateTime.Today : DateTime.Parse(value);
+        historial.FechaminFechafinal = historial.FechaInicio.Value.ToString("yyyy-MM-dd");
+        StateHasChanged();
+    }
+    #endregion
+
+    #region MetodosCrear
+
+    private bool Condicioncurp()
+    {
+        invalidCurp = false;
+        bool respuesta = false;
+        var iniciofecha = ProcesoPersona.curp.Substring(4, 6);
+        var año = iniciofecha.Substring(0, 2);
+        var mes = iniciofecha.Substring(2, 2);
+        var dia = iniciofecha.Substring(4, 2);
+        string[] fechanacimiento = ProcesoPersona.fechanacimiento.Value.ToString("yyyy/MM/dd").Split('/', ' ');
+        //string[] fechanacimiento = fechanacimientostring.Split('/', ' ');
+        var añocompletonacimiento = fechanacimiento[0];
+        var añonacimiento = añocompletonacimiento.Substring(2, 2);
+        var mesnacimiento = fechanacimiento[1];
+        var dianacimiento = fechanacimiento[2];
+        if (añonacimiento.Equals(año) && mesnacimiento.Equals(mes) && dianacimiento.Equals(dia))
+        {
+            respuesta = true;
+        }
+        return respuesta;
+    }
+
+    private async Task CrearActualizarPersona()
+    {
+        var respuestacurp = Condicioncurp();
+        if (!respuestacurp)
+        {
+            invalidCurp = true;
+        }
+        else
+        {
+            try
+            {
+                var respuesta = await manager.Post<PersonaDTO, PersonaDTO>($"api/Persona/CrearActualizarPersona", ProcesoPersona);
+                if (respuesta.Estado == EstadosDeRespuesta.Correcto)
+                {
+                    await js.InvokeVoidAsync("Swal.fire", "success", respuesta.Estatus.Mensaje, "Exitoso");
+                    navmanager.NavigateTo("/");
+                }
+                else
+                {
+                    mensajeError = respuesta.Estatus.Mensaje;
+                }
+            }
+            catch (Exception ex)
+            {
+                mensajeError = ex.ToString();
+            }
         }
     }
     #endregion

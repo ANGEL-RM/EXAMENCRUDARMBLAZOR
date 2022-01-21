@@ -695,8 +695,6 @@ Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Pages
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
-Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Personas.razor.g.cs
-Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Pages\Personas.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\bin\Debug\net5.0\wwwroot\_framework\MatBlazor.dll.gz
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\bin\Debug\net5.0\wwwroot\_framework\MatBlazor.dll
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\build-gz\YanawG1a.gz
@@ -731,8 +729,6 @@ Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclar
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Pages\RegistroPersonas.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclaration\Pages\InformacionPersonal.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Pages\InformacionPersonal.razor.g.cs
-Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclaration\Pages\MenuOpc.razor.g.cs
-Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Pages\MenuOpc.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Paises.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\Razor\Pages\Paises.razor.g.cs
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Estados.razor.g.cs

@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/InformacionPersonal/{TempPersonalId:long}")]
     public partial class InformacionPersonal : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,7 +133,7 @@ using CRUDARM.Shared.Externos;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 34 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\InformacionPersonal.razor"
+#line 120 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\InformacionPersonal.razor"
        
     [Parameter] public long TempPersonalId { get; set; }
 
@@ -169,6 +176,7 @@ using CRUDARM.Shared.Externos;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IManager manager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navmanager { get; set; }
     }
 }
 #pragma warning restore 1591

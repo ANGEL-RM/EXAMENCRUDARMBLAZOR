@@ -117,6 +117,13 @@ using CRUDARM.Shared.Externos;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 16 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\_Imports.razor"
+using CRUDARM.Shared.Persona;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Paises")]
     public partial class Paises : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,7 +133,7 @@ using CRUDARM.Shared.Externos;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 56 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\Paises.razor"
+#line 61 "Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Client\Pages\Paises.razor"
        
     protected Tbl_Pais Pais { get; set; } = new Tbl_Pais();
     protected List<Tbl_Pais> ListaPaises { get; set; } = new List<Tbl_Pais>();

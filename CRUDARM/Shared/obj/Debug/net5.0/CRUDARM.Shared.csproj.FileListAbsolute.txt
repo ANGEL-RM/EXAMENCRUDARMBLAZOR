@@ -9,3 +9,4 @@ Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Sha
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.dll
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\ref\CRUDARM.Shared.dll
 Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.pdb
+Z:\VisualStudioProyectoLocal\CRUDARM\CRUDARM\Shared\obj\Debug\net5.0\CRUDARM.Shared.csproj.AssemblyReference.cache
